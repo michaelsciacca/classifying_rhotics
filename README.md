@@ -44,17 +44,17 @@ print(rf)
 Print the model and examine the results. 
 ```R
 Call:
- randomForest(formula = allophone ~ performance + interlocuterGender + interlocuterSexOrientation + stress + manner_precedingSeg + precedingSegDuration + manner_followingSeg + duration + F1 + F2 + F3 + F4 + F3.F2_distance + cog + stdev + skewness + kurtosis, data = train) 
+ randomForest(formula = allophone ~ performance + interlocuterGender + interlocuterSexOrientation + stress + manner_precedingSeg +      precedingSegDuration + manner_followingSeg + duration + F1 + F2 + F3 + F4 + F3.F2_distance + cog + stdev + skewness + kurtosis, data = train) 
                Type of random forest: classification
                      Number of trees: 500
 No. of variables tried at each split: 4
 
-        OOB estimate of  error rate: 11.61%
+        OOB estimate of  error rate: 12.26%
 Confusion matrix:
         elision  r   ɾ class.error
 elision      34  0   0  0.00000000
 r             0 18  28  0.60869565
-ɾ             0  8 222  0.03478261
+ɾ             0 10 220  0.04347826
 ```
 We are able to verify that, because the dependent variable is categorical, this is a classification model. The number of trees is set to 500, the default. Next, we see the number of variables tried at each split. This number represents the approximate square root of the number of variables included in the model. The out of bag (OOB) estimate of error rate indicates that this model is about 88% accurate. Lastly, the confusion matrix shows that the predictions are rather good at predicting the elision and [ɾ] classes (0% error and 3.5% error, respectively), but errors are higher for [r] (60.9%). The confusion matrix table can be interpreted as follows: elision was predicted as elision 34 times, trills [r] were predicted as elision zero times, and taps [ɾ] were predicted as elision zero times; elision was predicted as a trill zero times, trills were predicted as trills 18 times, and taps were predicted as trills 28 times; lastly, elision was predicted as a tap zero times, trills were predicted as taps 8 times, and taps were predicted as taps 222 times.
 
@@ -111,31 +111,31 @@ Confusion Matrix and Statistics
           Reference
 Prediction elision  r  ɾ
    elision      14  0  0
-   r             0  8  5
-   ɾ             0 13 84
+   r             0  7  5
+   ɾ             0 14 84
 
 Overall Statistics
                                           
-               Accuracy : 0.8548          
-                 95% CI : (0.7803, 0.9116)
+               Accuracy : 0.8468          
+                 95% CI : (0.7711, 0.9052)
     No Information Rate : 0.7177          
-    P-Value [Acc > NIR] : 0.000243        
+    P-Value [Acc > NIR] : 0.0005576       
                                           
-                  Kappa : 0.6442          
+                  Kappa : 0.6204          
                                           
  Mcnemar's Test P-Value : NA              
 
 Statistics by Class:
 
                      Class: elision Class: r Class: ɾ
-Sensitivity                  1.0000  0.38095   0.9438
-Specificity                  1.0000  0.95146   0.6286
-Pos Pred Value               1.0000  0.61538   0.8660
-Neg Pred Value               1.0000  0.88288   0.8148
+Sensitivity                  1.0000  0.33333   0.9438
+Specificity                  1.0000  0.95146   0.6000
+Pos Pred Value               1.0000  0.58333   0.8571
+Neg Pred Value               1.0000  0.87500   0.8077
 Prevalence                   0.1129  0.16935   0.7177
-Detection Rate               0.1129  0.06452   0.6774
-Detection Prevalence         0.1129  0.10484   0.7823
-Balanced Accuracy            1.0000  0.66620   0.7862
+Detection Rate               0.1129  0.05645   0.6774
+Detection Prevalence         0.1129  0.09677   0.7903
+Balanced Accuracy            1.0000  0.64239   0.7719
 ```
 This model of the test data resulted in a decrease of accuracy (85.48%) and confidence interval (78.03% to 91.16%). However, we can consider the test data a more precise assessment of the random forest model because the model has been exposed to the test data. We can see that the test data’s accuracy mirrors the original model’s OOB estimate of error rate and subsequent accuracy rate for a similar reason. 
 
