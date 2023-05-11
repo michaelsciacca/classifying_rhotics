@@ -56,7 +56,7 @@ elision      34  0   0  0.00000000
 r             0 18  28  0.60869565
 ɾ             0 10 220  0.04347826
 ```
-We are able to verify that, because the dependent variable is categorical, this is a classification model. The number of trees is set to 500, the default. Next, we see the number of variables tried at each split. This number represents the approximate square root of the number of variables included in the model. The out of bag (OOB) estimate of error rate indicates that this model is about 88% accurate. Lastly, the confusion matrix shows that the predictions are rather good at predicting the elision and [ɾ] classes (0% error and 3.5% error, respectively), but errors are higher for [r] (60.9%). The confusion matrix table can be interpreted as follows: elision was predicted as elision 34 times, trills [r] were predicted as elision zero times, and taps [ɾ] were predicted as elision zero times; elision was predicted as a trill zero times, trills were predicted as trills 18 times, and taps were predicted as trills 28 times; lastly, elision was predicted as a tap zero times, trills were predicted as taps 8 times, and taps were predicted as taps 222 times.
+We are able to verify that, because the dependent variable is categorical, this is a classification model. The number of trees is set to 500, the default. Next, we see the number of variables tried at each split. This number represents the approximate square root of the number of variables included in the model. The out of bag (OOB) estimate of error rate indicates that this model is about 87% accurate. Lastly, the confusion matrix shows that the predictions are rather good at predicting the elision and [ɾ] classes (0% error and 4.4% error, respectively), but errors are higher for [r] (60.9%). The confusion matrix table can be interpreted as follows: elision was predicted as elision 34 times, trills [r] were predicted as elision zero times, and taps [ɾ] were predicted as elision zero times; elision was predicted as a trill zero times, trills were predicted as trills 18 times, and taps were predicted as trills 28 times; lastly, elision was predicted as a tap zero times, trills were predicted as taps 10 times, and taps were predicted as taps 220 times.
 
 To further examine the prediction and confusion matrix of the trained dataset, install and load the Caret package. Name your first prediction and use the predict function to examine the confusion matrix of the random forest model you previously created within the training set. 
 ```R
@@ -137,7 +137,7 @@ Detection Rate               0.1129  0.05645   0.6774
 Detection Prevalence         0.1129  0.09677   0.7903
 Balanced Accuracy            1.0000  0.64239   0.7719
 ```
-This model of the test data resulted in a decrease of accuracy (85.48%) and confidence interval (78.03% to 91.16%). However, we can consider the test data a more precise assessment of the random forest model because the model has been exposed to the test data. We can see that the test data’s accuracy mirrors the original model’s OOB estimate of error rate and subsequent accuracy rate for a similar reason. 
+This model of the test data resulted in a decrease of accuracy (85.68%) and confidence interval (77.11% to 90.52%). However, we can consider the test data a more precise assessment of the random forest model because the model has been exposed to the test data. We can see that the test data’s accuracy mirrors the original model’s OOB estimate of error rate and subsequent accuracy rate for a similar reason. 
 
 Next, we will visualize the OOB error by plotting the random forest. 
 
@@ -157,29 +157,41 @@ train <- data[ , ! names(train) %in% c("file", "performance_interlocuterGender_S
 # Tune the Model
 t <- tuneRF(train[,-5], train[,5], stepFactor = 0.5, plot = TRUE, ntreeTry = 100, trace = TRUE, improve = .05)
 ```
-![mtry](https://user-images.githubusercontent.com/133238472/237767073-90d8b476-a83b-4b3e-9493-a52c5f4c72a0.png)
+![mtry](https://user-images.githubusercontent.com/133238472/237772102-14607853-df4f-4067-bc31-2b5f7c44d2a6.png)
+
 The plot shows us that the OOB error is lowest when mtry is at 4. With this information extracted, we will rerun the random forest model and add a few more details. The number of trees will be set to 100, mtry will be set to 4, the importance function will ask the model for information about variable importance measures, and proximity will be used. 
 
 Now, you can compare the earlier model with the ~tuned up~ model and, ideally, your error rate will have improved. 
 ```R
 Call:
- randomForest(formula = allophone ~ performance + interlocuterGender + interlocuterSexOrientation + stress + manner_precedingSeg +      precedingSegDuration + manner_followingSeg + duration + F1 + F2 + F3 + F4 + F3.F2_distance + cog + stdev + skewness + kurtosis, data = train, ntree = 100, mtry = 4, importance = TRUE, proximity = TRUE) 
+ randomForest(formula = allophone ~ performance + interlocuterGender +      interlocuterSexOrientation + stress + manner_precedingSeg +      precedingSegDuration + manner_followingSeg + duration + F1 +      F2 + F3 + F4 + F3.F2_distance + cog + stdev + skewness +      kurtosis, data = train, ntree = 100, mtry = 16, importance = TRUE,      proximity = TRUE) 
                Type of random forest: classification
                      Number of trees: 100
-No. of variables tried at each split: 4
+No. of variables tried at each split: 16
 
-        OOB estimate of  error rate: 11.29%
+        OOB estimate of  error rate: 12.21%
 Confusion matrix:
         elision  r   ɾ class.error
 elision      48  0   0  0.00000000
-r             1 25  41  0.62686567
-ɾ             0  7 312  0.02194357
+r             0 31  36  0.53731343
+ɾ             0 17 302  0.05329154
 ```
-You will see that the error rate did, indeed, improve by .32%. Next, you will check the prediction and confusion matrix on both train data and test data to see if these models improved as well. 
+You will see that the error rate did, indeed, improve by .05%. Next, you will check the prediction and confusion matrix on both train data and test data to see if these models improved as well. 
+```R
+# Rerun Tuned up Prediction & Confusion Matrix on Train & Test Data
+library(caret)
+p1 <- predict(rf, train)
+confusionMatrix(p1, train$allophone)
 
+p2 <- predict(rf, test)
+confusionMatrix(p2, test$allophone)
+```
 In the 100 tree model, you can examine the size of the trees in terms of the number of nodes from the rf model. 
-
-The histogram shows the distribution of the number of nodes in each of the 100 trees included in the model. It shows that in our model, there are over 30 trees with 40-45 nodes. There is a small number of trees with 25 nodes and an even smaller number of trees with 55 nodes. In other words, the distribution of nodes in the trees is from 25 to 60. 
+```R
+# Number of Nodes for Trees
+hist(treesize(rf), main = "Number of Nodes for the Trees", col = "blue")
+```
+The histogram shows the distribution of the number of nodes in each of the 100 trees included in the model. It shows that in our model, there are over 35 trees with above 40 nodes. There is a small number of trees with 25 nodes and a small number of trees with 55 nodes. In other words, the distribution of nodes in the trees is from 25 to 55. 
 
 Essential for the interpretability of the random forest, the varImpPlot gives you the ranked importance of each independent variable included in the model. 
 
