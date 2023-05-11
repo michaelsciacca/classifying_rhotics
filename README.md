@@ -105,6 +105,37 @@ Now, run the same code used previously on the test data and name the new model a
 # Prediction & Confusion Matrix on Test Data
 p2 <- predict(rf, test)
 confusionMatrix(p2, test$allophone)
+
+Confusion Matrix and Statistics
+
+          Reference
+Prediction elision  r  ɾ
+   elision      14  0  0
+   r             0  8  5
+   ɾ             0 13 84
+
+Overall Statistics
+                                          
+               Accuracy : 0.8548          
+                 95% CI : (0.7803, 0.9116)
+    No Information Rate : 0.7177          
+    P-Value [Acc > NIR] : 0.000243        
+                                          
+                  Kappa : 0.6442          
+                                          
+ Mcnemar's Test P-Value : NA              
+
+Statistics by Class:
+
+                     Class: elision Class: r Class: ɾ
+Sensitivity                  1.0000  0.38095   0.9438
+Specificity                  1.0000  0.95146   0.6286
+Pos Pred Value               1.0000  0.61538   0.8660
+Neg Pred Value               1.0000  0.88288   0.8148
+Prevalence                   0.1129  0.16935   0.7177
+Detection Rate               0.1129  0.06452   0.6774
+Detection Prevalence         0.1129  0.10484   0.7823
+Balanced Accuracy            1.0000  0.66620   0.7862
 ```
 This model of the test data resulted in a decrease of accuracy (85.48%) and confidence interval (78.03% to 91.16%). However, we can consider the test data a more precise assessment of the random forest model because the model has been exposed to the test data. We can see that the test data’s accuracy mirrors the original model’s OOB estimate of error rate and subsequent accuracy rate for a similar reason. 
 
