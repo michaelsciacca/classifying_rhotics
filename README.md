@@ -201,7 +201,7 @@ varImpPlot(rf, sort = T, main = "Variable Importance")
 importance(rf)
 varUsed(rf)
 ```
-
+![Variable Importance]()
 The first chart in the plot of variable importance tells us that duration is the most important factor by a long shot; excluding duration would cause the model’s accuracy to decrease by more than 40%. The least important variable is rhotic stress (stressed vs. unstressed). The MeanDecreaseGini chart measures how “pure” the nodes are when the variable is excluded. Purity refers to how evenly split a node is; when all of the data belongs to a single class, it is maximally pure and when the data is split evenly, it is maximally impure. Duration is the greatest contributing factor to Gini as well. 
 
 You may further investigate the values associated with the varImpPlot above. Lastly, varUsed allows us to see how often the variables appeared in the random forest. 
