@@ -157,13 +157,25 @@ train <- data[ , ! names(train) %in% c("file", "performance_interlocuterGender_S
 # Tune the Model
 t <- tuneRF(train[,-5], train[,5], stepFactor = 0.5, plot = TRUE, ntreeTry = 100, trace = TRUE, improve = .05)
 ```
-![mtry]()
-
-The plot shows us that the OOB error is lowest when mtry is at 8. With this information extracted, we will rerun the random forest model and add a few more details. The number of trees will be set to 100, mtry will be set to 8, the importance function will ask the model for information about variable importance measures, and proximity will be used. 
+![mtry](https://user-images.githubusercontent.com/133238472/237767073-90d8b476-a83b-4b3e-9493-a52c5f4c72a0.png)
+The plot shows us that the OOB error is lowest when mtry is at 4. With this information extracted, we will rerun the random forest model and add a few more details. The number of trees will be set to 100, mtry will be set to 4, the importance function will ask the model for information about variable importance measures, and proximity will be used. 
 
 Now, you can compare the earlier model with the ~tuned up~ model and, ideally, your error rate will have improved. 
+```R
+Call:
+ randomForest(formula = allophone ~ performance + interlocuterGender + interlocuterSexOrientation + stress + manner_precedingSeg +      precedingSegDuration + manner_followingSeg + duration + F1 + F2 + F3 + F4 + F3.F2_distance + cog + stdev + skewness + kurtosis, data = train, ntree = 100, mtry = 4, importance = TRUE, proximity = TRUE) 
+               Type of random forest: classification
+                     Number of trees: 100
+No. of variables tried at each split: 4
 
-You will see that the error rate did, indeed, improve. Next, you will check the prediction and confusion matrix on both train data and test data to see if these models improved as well. 
+        OOB estimate of  error rate: 11.29%
+Confusion matrix:
+        elision  r   ɾ class.error
+elision      48  0   0  0.00000000
+r             1 25  41  0.62686567
+ɾ             0  7 312  0.02194357
+```
+You will see that the error rate did, indeed, improve by .32%. Next, you will check the prediction and confusion matrix on both train data and test data to see if these models improved as well. 
 
 In the 100 tree model, you can examine the size of the trees in terms of the number of nodes from the rf model. 
 
