@@ -141,6 +141,12 @@ This model of the test data resulted in a decrease of accuracy (85.48%) and conf
 
 Next, we will visualize the OOB error by plotting the random forest. 
 
+```R
+# Error Rate of Random Forest
+plot(rf)
+
+```
+
 In the plot, the OOB error decreases sharply and then levels out. This shows us that the error does not improve after about 100 trees. 
 
 The first step of tuning the model is only necessary if you did not include every independent variable in your model from the dataset. Since this is the case for my dataset, I will remove the variables not included in the model from my train data. Next, we use the tuneRF function to determine how to improve the model. Using the train data, we remove the fifth input variable—the dependent variable (allophone/rhotic type)—and then include the fifth variable as the response variable. By assigning a number to stepFactor, mtry either improves or worsens. Begin by assigning it to “0.5”. After following the corresponding steps, if the output doesn’t complete an effective search, the mtry value can be subsequently increased or decreased. According to [RStudio Team (2023)](https://cran.r-project.org/), “plot” decides “whether to plot the OOB error as a function of mtry”. We will decide to do this by writing “TRUE”. Because we saw previously that the error does not improve after about 100 trees, we will try the model with 100 instead of the standard 500. By using the trace function, it “allows you to to insert debugging code”. The improve function tells us that “the (relative) improvement in OOB error must be by this much for the search to continue”. We will assign a small number to this function. 
