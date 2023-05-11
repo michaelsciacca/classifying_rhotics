@@ -56,10 +56,46 @@ elision      34  0   0  0.00000000
 r             0 18  28  0.60869565
 ɾ             0  8 222  0.03478261
 ```
-We are able to verify that, because the dependent variable is categorical, this is a classification model. The number of trees is set to 500, the default. Next, we see the number of variables tried at each split. This number represents the approximate square root of the number of variables included in the model. The out of bag (OOB) estimate of error rate indicates that this model is about 89% accurate. Lastly, the confusion matrix shows that the predictions are rather good at predicting the elision and [ɾ] classes (0% error and 3.0% error, respectively), but errors are higher for [r] (60.1%). The confusion matrix table can be interpreted as follows: elision was predicted as elision 34 times, trills [r] were predicted as elision zero times, and taps [ɾ] were predicted as elision zero times; elision was predicted as a trill zero times, trills were predicted as trills 18 times, and taps were predicted as trills 28 times; lastly, elision was predicted as a tap zero times, trills were predicted as taps 7 times, and taps were predicted as taps 223 times.
+We are able to verify that, because the dependent variable is categorical, this is a classification model. The number of trees is set to 500, the default. Next, we see the number of variables tried at each split. This number represents the approximate square root of the number of variables included in the model. The out of bag (OOB) estimate of error rate indicates that this model is about 88% accurate. Lastly, the confusion matrix shows that the predictions are rather good at predicting the elision and [ɾ] classes (0% error and 3.5% error, respectively), but errors are higher for [r] (60.9%). The confusion matrix table can be interpreted as follows: elision was predicted as elision 34 times, trills [r] were predicted as elision zero times, and taps [ɾ] were predicted as elision zero times; elision was predicted as a trill zero times, trills were predicted as trills 18 times, and taps were predicted as trills 28 times; lastly, elision was predicted as a tap zero times, trills were predicted as taps 8 times, and taps were predicted as taps 222 times.
 
 To further examine the prediction and confusion matrix of the trained dataset, install and load the Caret package. Name your first prediction and use the predict function to examine the confusion matrix of the random forest model you previously created within the training set. 
+```R
+# Prediction & Confusion Matrix on Train Data
+library(caret)
+p1 <- predict(rf, train)
+confusionMatrix(p1, train$allophone)
 
+Confusion Matrix and Statistics
+
+          Reference
+Prediction elision   r   ɾ
+   elision      34   0   0
+   r             0  46   0
+   ɾ             0   0 230
+
+Overall Statistics
+                                     
+               Accuracy : 1          
+                 95% CI : (0.9882, 1)
+    No Information Rate : 0.7419     
+    P-Value [Acc > NIR] : < 2.2e-16  
+                                     
+                  Kappa : 1          
+                                     
+ Mcnemar's Test P-Value : NA         
+
+Statistics by Class:
+
+                     Class: elision Class: r Class: ɾ
+Sensitivity                  1.0000   1.0000   1.0000
+Specificity                  1.0000   1.0000   1.0000
+Pos Pred Value               1.0000   1.0000   1.0000
+Neg Pred Value               1.0000   1.0000   1.0000
+Prevalence                   0.1097   0.1484   0.7419
+Detection Rate               0.1097   0.1484   0.7419
+Detection Prevalence         0.1097   0.1484   0.7419
+Balanced Accuracy            1.0000   1.0000   1.0000
+```
 In the confusion matrix, we see that there were no misclassifications in any of the rhotic categories. To get the accuracy interval, calculate the total instances along the diagonal of the confusion matrix and divide by the number of tokens in the training interval. Since the confusion accurately predicted all allophones, the accuracy interval displays a score of 1, or 100%. The 95% confidence interval (CI) is also rather high, indicating 95% confidence between 98.82% and 100%. 
 
 When comparing the previous two outputs of the same data, we see that there is a discrepancy between the accuracy of the first model (89%) and the second (100%). This is because the first model utilizes an OOB rate of error which predicts the error based on data that the model has not seen, whereas the second only uses data that the model has seen. 
