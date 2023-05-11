@@ -11,8 +11,23 @@ To begin, the Praat script, found here, adapts and expands upon the scripting tu
 
 Once you have successfully completed your acoustic analysis and exported your measures to a .csv file, we take on the statistical analysis. The script for the random forest in this tutorial was largely adapted from [Rai (2020)](https://www.taylorfrancis.com/chapters/edit/10.1201/9781351123303-2/supervised-machine-learning-application-example-using-random-forest-bharatendra-rai) and this researcher’s [Youtube tutorial](https://www.youtube.com/watch?v=dJclNIN-TPo). Before partitioning your data, it is essential to convert the strings to factors. This ensures that the categorical variables are listed as factors and that the continuous variables are numeric. Check the structure of the data to see if you have any missing values or discrepancies in this categorization. A categorical dependent variable that is not classified as a factor will prevent the random forest from running.
 
+Begin by importing and familiarizing yourself with your data. 
+
+```R
+# Import and Get to Know Your Data
+setwd("~/Desktop")
+data <- read.csv("CodaRhotics.csv", stringsAsFactors = TRUE)
+str(data)
+```
 Before partitioning, set the seed to make the analysis replicable, as this model uses random sampling (see [Gardner, 2023](https://lingmethodshub.github.io/content/R/lvc_r/090_lvcr.html)). Partitioning 100% of the data into two sets of 70% and 30% allows us to train the model. Doing this allows us to see how well we trained the model—that is, how well 70% of the data is able to predict the outcome of the other 30%. It is also common to see model partitions of 80% and 20%.  
 
+```R
+# Separate Your Data into Training and Testing Datasets  
+set.seed(123)
+ind <- sample(2,nrow(data), replace = TRUE, prob = c(0.7, 0.3))
+train <- data[ind==1,]
+test <- data[ind==2,]
+```
 Next, install and load…you guessed it!...random forest. Set the seed again for this model to make it replicable. Name the random forest model and include the categorical dependent variable—in this case, it is the type of rhotic (allophone) which has 3 levels—as a function of the independent variables you’d like to test. You can either select only specific independent variables to include in your model, or use a period before the comma to include all other variables. 
 
 rf <- randomForest(allophone~., data=train). 
