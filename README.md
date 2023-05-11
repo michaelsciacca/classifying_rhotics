@@ -159,24 +159,24 @@ t <- tuneRF(train[,-5], train[,5], stepFactor = 0.5, plot = TRUE, ntreeTry = 100
 ```
 ![mtry](https://user-images.githubusercontent.com/133238472/237772102-14607853-df4f-4067-bc31-2b5f7c44d2a6.png)
 
-The plot shows us that the OOB error is lowest when mtry is at 4. With this information extracted, we will rerun the random forest model and add a few more details. The number of trees will be set to 100, mtry will be set to 4, the importance function will ask the model for information about variable importance measures, and proximity will be used. 
+The plot shows us that the OOB error is lowest when mtry is at 16. With this information extracted, we will rerun the random forest model and add a few more details. The number of trees will be set to 100, mtry will be set to 16, the importance function will ask the model for information about variable importance measures, and proximity will be used. 
 
 Now, you can compare the earlier model with the ~tuned up~ model and, ideally, your error rate will have improved. 
 ```R
 Call:
- randomForest(formula = allophone ~ performance + interlocuterGender +      interlocuterSexOrientation + stress + manner_precedingSeg +      precedingSegDuration + manner_followingSeg + duration + F1 +      F2 + F3 + F4 + F3.F2_distance + cog + stdev + skewness +      kurtosis, data = train, ntree = 100, mtry = 16, importance = TRUE,      proximity = TRUE) 
+ randomForest(formula = allophone ~ performance + interlocuterGender + interlocuterSexOrientation + stress + manner_precedingSeg +      precedingSegDuration + manner_followingSeg + duration + F1 + F2 + F3 + F4 + F3.F2_distance + cog + stdev + skewness + kurtosis, data = train, ntree = 100, mtry = 16, importance = TRUE, proximity = TRUE) 
                Type of random forest: classification
                      Number of trees: 100
 No. of variables tried at each split: 16
 
-        OOB estimate of  error rate: 12.21%
+        OOB estimate of  error rate: 11.29%
 Confusion matrix:
         elision  r   ɾ class.error
-elision      48  0   0  0.00000000
-r             0 31  36  0.53731343
-ɾ             0 17 302  0.05329154
+elision      34  0   0  0.00000000
+r             0 23  23  0.50000000
+ɾ             0 12 218  0.05217391
 ```
-You will see that the error rate did, indeed, improve by .05%. Next, you will check the prediction and confusion matrix on both train data and test data to see if these models improved as well. 
+You will see that the error rate did, indeed, improve by .97%. Next, you will check the prediction and confusion matrix on both train data and test data to see if these models improved as well. 
 ```R
 # Rerun Tuned up Prediction & Confusion Matrix on Train & Test Data
 library(caret)
@@ -198,15 +198,55 @@ Essential for the interpretability of the random forest, the varImpPlot gives yo
 ```R
 # Variable Importance
 varImpPlot(rf, sort = T, main = "Variable Importance")
-importance(rf)
-varUsed(rf)
 ```
-![Variable Importance]()
-The first chart in the plot of variable importance tells us that duration is the most important factor by a long shot; excluding duration would cause the model’s accuracy to decrease by more than 40%. The least important variable is rhotic stress (stressed vs. unstressed). The MeanDecreaseGini chart measures how “pure” the nodes are when the variable is excluded. Purity refers to how evenly split a node is; when all of the data belongs to a single class, it is maximally pure and when the data is split evenly, it is maximally impure. Duration is the greatest contributing factor to Gini as well. 
+![Variable Importance](https://user-images.githubusercontent.com/133238472/237776998-e07c8b0d-ebd4-4f37-948f-e083f1a7547b.png)
 
-You may further investigate the values associated with the varImpPlot above. Lastly, varUsed allows us to see how often the variables appeared in the random forest. 
+The first chart in the plot of variable importance tells us that duration is the most important factor by a long shot; excluding duration would cause the model’s accuracy to decrease by more than 50%. The least important variable is rhotic stress (stressed vs. unstressed). The MeanDecreaseGini chart measures how “pure” the nodes are when the variable is excluded. Purity refers to how evenly split a node is; when all of the data belongs to a single class, it is maximally pure and when the data is split evenly, it is maximally impure. Duration is the greatest contributing factor to Gini as well. 
 
-The second variable with the smallest number in the table corresponds with the second predictor variable in the model—interlocuterGender. This variable’s importance value is close to zero because it appeared infrequently in the model compared to the other predictors. However, if we compare this with the eighth variable, duration, it has occurred 669 times in the model, indicating that it is maximally important. 
+You may further investigate the numerical values associated with the varImpPlot above by using the importance() command. Lastly, varUsed allows us to see how often the variables appeared in the random forest. 
+```R
+> importance(rf)
+                            elision            r           ɾ
+performance                  0.0000  2.196466169  0.08946103
+interlocuterGender           0.0000 -0.129076191  0.58323473
+interlocuterSexOrientation   0.0000 -1.005037815 -0.52290874
+stress                       0.0000  1.228677066  0.23175070
+manner_precedingSeg          0.0000  0.000000000  0.00000000
+precedingSegDuration         0.0000  1.385330734  2.64385007
+manner_followingSeg          0.0000  0.519018714 -0.09948453
+duration                   113.2237 24.393693180 33.96058055
+F1                           0.0000 -0.005796602  3.58503043
+F2                           0.0000  2.110664702  8.71219781
+F3                           0.0000 -1.288560348  3.49142980
+F4                           0.0000 -0.598624126  2.14306273
+F3.F2_distance               0.0000 -0.248645443  4.47204780
+cog                          0.0000 -1.947694886  3.79707309
+stdev                        0.0000  1.565677763  2.84824145
+skewness                     0.0000  1.311208090  2.81607764
+kurtosis                     0.0000 -2.106750177  2.37189334
+                           MeanDecreaseAccuracy MeanDecreaseGini
+performance                          1.63387783        0.9196072
+interlocuterGender                   0.31201815        0.4173132
+interlocuterSexOrientation          -0.82902701        0.2256313
+stress                               0.57499582        0.7691910
+manner_precedingSeg                  0.00000000        0.0000000
+precedingSegDuration                 3.34178742        4.0853319
+manner_followingSeg                  0.09674065        0.1515332
+duration                            51.73754422       86.2037644
+F1                                   3.42764755        4.9058118
+F2                                   8.30695849        7.5758581
+F3                                   3.27834837        2.0111964
+F4                                   2.00181179        3.3653960
+F3.F2_distance                       4.52442586        3.8073735
+cog                                  3.04311852        4.7563355
+stdev                                3.76823500        3.2593162
+skewness                             3.27585557        3.5153831
+kurtosis                             1.95735811        2.5321187
+
+> varUsed(rf)
+ [1]  29  14   6  58   0 161   8 442 189 255  93 137 169 187 152 169 119
+
+The fifth variable with the smallest number in the table (o) corresponds with the fifth predictor variable in the model—manner_followingSeg. This variable’s importance value  zero because it did not appear in the model compared to the other predictors. However, if we compare this with the eighth variable, duration, it has occurred 442 times in the model, indicating that it is maximally important. 
 
 You did it! Now that you’ve created your random forest classification, you can have greater confidence in your selected measure(s) that are tuned to your unique dataset. Depending on your goals, your next step might be running a linear mixed effects model with duration as your dependent variable. 
 
