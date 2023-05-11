@@ -246,7 +246,7 @@ kurtosis                             1.95735811        2.5321187
 
 > varUsed(rf)
  [1]  29  14   6  58   0 161   8 442 189 255  93 137 169 187 152 169 119
-
+```
 The fifth variable with the smallest number in the table (o) corresponds with the fifth predictor variable in the model—manner_followingSeg. This variable’s importance value  zero because it did not appear in the model compared to the other predictors. However, if we compare this with the eighth variable, duration, it has occurred 442 times in the model, indicating that it is maximally important. 
 
 You did it! Now that you’ve created your random forest classification, you can have greater confidence in your selected measure(s) that are tuned to your unique dataset. Depending on your goals, your next step might be running a linear mixed effects model with duration as your dependent variable. 
