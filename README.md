@@ -22,7 +22,7 @@ str(data)
 Before partitioning, set the seed to make the analysis replicable, as this model uses random sampling (see [Gardner, 2023](https://lingmethodshub.github.io/content/R/lvc_r/090_lvcr.html)). Partitioning 100% of the data into two sets of 70% and 30% allows us to train the model. Doing this allows us to see how well we trained the model—that is, how well 70% of the data is able to predict the outcome of the other 30%. It is also common to see model partitions of 80% and 20%.  
 
 ```R
-# Separate Your Data into Training and Testing Datasets  
+# Separate Data into Training and Testing Datasets  
 set.seed(123)
 ind <- sample(2,nrow(data), replace = TRUE, prob = c(0.7, 0.3))
 train <- data[ind==1,]
@@ -30,10 +30,32 @@ test <- data[ind==2,]
 ```
 Next, install and load…you guessed it!...random forest. Set the seed again for this model to make it replicable. Name the random forest model and include the categorical dependent variable—in this case, it is the type of rhotic (allophone) which has 3 levels—as a function of the independent variables you’d like to test. You can either select only specific independent variables to include in your model, or use a period before the comma to include all other variables. 
 
+```R
+# Use a period if You Want to Test All Variables 
 rf <- randomForest(allophone~., data=train). 
 
+# Create the Random Forest Model
+install.packages("randomForest")
+library(randomForest)
+set.seed(222)
+rf <- randomForest(allophone~performance+interlocuterGender+interlocuterSexOrientation+stress+manner_precedingSeg+precedingSegDuration+manner_followingSeg+duration+F1+F2+F3+F4+F3.F2_distance+cog+stdev+skewness+kurtosis, data=train)
+print(rf)
+```
 Print the model and examine the results. 
+```R
+Call:
+ randomForest(formula = allophone ~ performance + interlocuterGender + interlocuterSexOrientation + stress + manner_precedingSeg + precedingSegDuration + manner_followingSeg + duration + F1 + F2 + F3 + F4 + F3.F2_distance + cog + stdev + skewness + kurtosis, data = train) 
+               Type of random forest: classification
+                     Number of trees: 500
+No. of variables tried at each split: 4
 
+        OOB estimate of  error rate: 11.61%
+Confusion matrix:
+        elision  r   ɾ class.error
+elision      34  0   0  0.00000000
+r             0 18  28  0.60869565
+ɾ             0  8 222  0.03478261
+```
 We are able to verify that, because the dependent variable is categorical, this is a classification model. The number of trees is set to 500, the default. Next, we see the number of variables tried at each split. This number represents the approximate square root of the number of variables included in the model. The out of bag (OOB) estimate of error rate indicates that this model is about 89% accurate. Lastly, the confusion matrix shows that the predictions are rather good at predicting the elision and [ɾ] classes (0% error and 3.0% error, respectively), but errors are higher for [r] (60.1%). The confusion matrix table can be interpreted as follows: elision was predicted as elision 34 times, trills [r] were predicted as elision zero times, and taps [ɾ] were predicted as elision zero times; elision was predicted as a trill zero times, trills were predicted as trills 18 times, and taps were predicted as trills 28 times; lastly, elision was predicted as a tap zero times, trills were predicted as taps 7 times, and taps were predicted as taps 223 times.
 
 To further examine the prediction and confusion matrix of the trained dataset, install and load the Caret package. Name your first prediction and use the predict function to examine the confusion matrix of the random forest model you previously created within the training set. 
