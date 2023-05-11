@@ -98,10 +98,14 @@ Balanced Accuracy            1.0000   1.0000   1.0000
 ```
 In the confusion matrix, we see that there were no misclassifications in any of the rhotic categories. To get the accuracy interval, calculate the total instances along the diagonal of the confusion matrix and divide by the number of tokens in the training interval. Since the confusion accurately predicted all allophones, the accuracy interval displays a score of 1, or 100%. The 95% confidence interval (CI) is also rather high, indicating 95% confidence between 98.82% and 100%. 
 
-When comparing the previous two outputs of the same data, we see that there is a discrepancy between the accuracy of the first model (89%) and the second (100%). This is because the first model utilizes an OOB rate of error which predicts the error based on data that the model has not seen, whereas the second only uses data that the model has seen. 
+When comparing the previous two outputs of the same data, we see that there is a discrepancy between the accuracy of the first model (88%) and the second (100%). This is because the first model utilizes an OOB rate of error which predicts the error based on data that the model has not seen, whereas the second only uses data that the model has seen. 
 
 Now, run the same code used previously on the test data and name the new model accordingly. 
-
+```R
+# Prediction & Confusion Matrix on Test Data
+p2 <- predict(rf, test)
+confusionMatrix(p2, test$allophone)
+```
 This model of the test data resulted in a decrease of accuracy (85.48%) and confidence interval (78.03% to 91.16%). However, we can consider the test data a more precise assessment of the random forest model because the model has been exposed to the test data. We can see that the test data’s accuracy mirrors the original model’s OOB estimate of error rate and subsequent accuracy rate for a similar reason. 
 
 Next, we will visualize the OOB error by plotting the random forest. 
