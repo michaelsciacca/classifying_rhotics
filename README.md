@@ -193,7 +193,7 @@ hist(treesize(rf), main = "Number of Nodes for the Trees", col = "blue")
 ```
 ![Number of Nodes for the Trees](https://user-images.githubusercontent.com/133238472/237775029-8292dc8e-d13c-464c-b100-95bb4b50f5df.png)
 
-The histogram shows the distribution of the number of nodes in each of the 100 trees included in the model. It shows that in our model, there are over 35 trees with above 40 nodes. There is a small number of trees with 25 nodes and a small number of trees with 55 nodes. In other words, the distribution of nodes in the trees is from 25 to 55. 
+The histogram shows the distribution of the number of nodes in each of the 100 trees included in the model. It shows that in our model, there are over 40 trees with above 35 nodes. There is a small number of trees with 25 nodes and a small number of trees with 55 nodes. In other words, the distribution of nodes in the trees is from 25 to 55. 
 
 Essential for the interpretability of the random forest, the varImpPlot gives you the ranked importance of each independent variable included in the model. 
 ```R
