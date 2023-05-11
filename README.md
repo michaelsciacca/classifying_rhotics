@@ -145,7 +145,7 @@ Next, we will visualize the OOB error by plotting the random forest.
 # Error Rate of Random Forest
 plot(rf)
 ```
-![Error Rate of Random Forest](OOB Error.png)
+![Random Forest Error Rate](https://user-images.githubusercontent.com/133238472/237765339-f1843fc3-2210-452c-b008-970b1fdfad1b.png)
 
 In the plot, the OOB error decreases sharply and then levels out. This shows us that the error does not improve after about 100 trees. 
 
