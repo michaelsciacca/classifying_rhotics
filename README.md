@@ -195,6 +195,12 @@ hist(treesize(rf), main = "Number of Nodes for the Trees", col = "blue")
 The histogram shows the distribution of the number of nodes in each of the 100 trees included in the model. It shows that in our model, there are over 35 trees with above 40 nodes. There is a small number of trees with 25 nodes and a small number of trees with 55 nodes. In other words, the distribution of nodes in the trees is from 25 to 55. 
 
 Essential for the interpretability of the random forest, the varImpPlot gives you the ranked importance of each independent variable included in the model. 
+```R
+# Variable Importance
+varImpPlot(rf, sort = T, main = "Variable Importance")
+importance(rf)
+varUsed(rf)
+```
 
 The first chart in the plot of variable importance tells us that duration is the most important factor by a long shot; excluding duration would cause the model’s accuracy to decrease by more than 40%. The least important variable is rhotic stress (stressed vs. unstressed). The MeanDecreaseGini chart measures how “pure” the nodes are when the variable is excluded. Purity refers to how evenly split a node is; when all of the data belongs to a single class, it is maximally pure and when the data is split evenly, it is maximally impure. Duration is the greatest contributing factor to Gini as well. 
 
