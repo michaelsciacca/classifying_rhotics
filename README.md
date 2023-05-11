@@ -161,7 +161,7 @@ t <- tuneRF(train[,-5], train[,5], stepFactor = 0.5, plot = TRUE, ntreeTry = 100
 
 The plot shows us that the OOB error is lowest when mtry is at 16. With this information extracted, we will rerun the random forest model and add a few more details. The number of trees will be set to 100, mtry will be set to 16, the importance function will ask the model for information about variable importance measures, and proximity will be used. 
 
-Now, you can compare the earlier model with the ~tuned up~ model and, ideally, your error rate will have improved. 
+Now, you can compare the earlier model with the tuned up model and, ideally, your error rate will have improved. 
 ```R
 Call:
  randomForest(formula = allophone ~ performance + interlocuterGender + interlocuterSexOrientation + stress + manner_precedingSeg +      precedingSegDuration + manner_followingSeg + duration + F1 + F2 + F3 + F4 + F3.F2_distance + cog + stdev + skewness + kurtosis, data = train, ntree = 100, mtry = 16, importance = TRUE, proximity = TRUE) 
