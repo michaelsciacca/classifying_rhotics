@@ -252,7 +252,32 @@ The fifth variable with the smallest number in the table (o) corresponds with th
 You did it! Now that you’ve created your random forest classification, you can have greater confidence in your selected measure(s) that are tuned to your unique dataset. Depending on your goals, your next step might be running a linear mixed effects model with duration as your dependent variable. 
 
 
+**References**
 
+ Amengual, M. (2016). Acoustic correlates of the Spanish tap-trill contrast: Heritage and L2 Spanish speakers. *Heritage Language Journal*, *13*(2), 88-112.
+
+ Balukas, C., & Koops, C. (2015). Spanish-English bilingual voice onset time in spontaneous code-switching. *International Journal of Bilingualism*, *19*(4), 423-443.
+
+ Bradley, T. G. (2019). Spanish rhotics and the phonetics-phonology interface. In *The Routledge Handbook of Spanish Phonology* (pp. 237-258). Routledge.
+
+ Boersma, P. & Weenink, D. (2023). Praat: doing phonetics by computer [Computer program]. Version 6.3.10. http://www.praat.org/. 
+
+ Campbell, H., Harel, D., Hitchcock, E., & McAllister Byun, T. (2018). Selecting an acoustic correlate for automated measurement of American English rhotic production in children. *International journal of speech-language pathology*, *20*(6), 635-643.
+
+ Colantoni, L. (2006). Increasing periodicity to reduce similarity: an acoustic account of deassibilation in rhotics. In *Selected proceedings of the 2nd Conference on Laboratory Approaches to Spanish Phonetics and Phonology* (pp. 22-34). Cascadilla Proceedings Project.
+
+ Gardner, M. (2023). Random Forests: The Basics. *Linguistics Methods Hub: Doing LVC with R*. (https://lingmethodshub.github.io/content/R/lvc_r/090_lvcr.html). doi: 10.5281/zenodo.7160718
+
+ Jongman, A., Wayland, R., & Wong, S. (2000). Acoustic characteristics of English fricatives. *The Journal of the Acoustical Society of America*, *108*(3), 1252-1263.
+
+ McAuliffe, M., Socolof, M., Mihuc, S., Wagner, M., & Sonderegger, M. (2017, August). Montreal forced aligner: Trainable text-speech alignment using kaldi. In *Interspeech* (Vol. 2017, pp. 498-502).
+
+ Rai, B. (2020). Supervised Machine Learning: Application Example Using Random Forest in R. In *Mathematics Applied to Engineering and Management* (pp. 25-37). CRC Press.
+
+ RStudio Team (2023). RStudio: Integrated Development for R. RStudio.
+
+ Zhou, X., Espy-Wilson, C. Y., Boyce, S., Tiede, M., Holland, C., & Choe, A. (2008). A magnetic resonance imaging-based articulatory and acoustic study of “retroflex” and “bunched” American English /r/. *The Journal of the Acoustical Society of America*, *123*(6), 4466-4481.
+</div>
 
 
 
