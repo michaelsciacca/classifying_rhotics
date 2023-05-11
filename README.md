@@ -137,7 +137,7 @@ Detection Rate               0.1129  0.05645   0.6774
 Detection Prevalence         0.1129  0.09677   0.7903
 Balanced Accuracy            1.0000  0.64239   0.7719
 ```
-This model of the test data resulted in a decrease of accuracy (85.68%) and confidence interval (77.11% to 90.52%). However, we can consider the test data a more precise assessment of the random forest model because the model has been exposed to the test data. We can see that the test data’s accuracy mirrors the original model’s OOB estimate of error rate and subsequent accuracy rate for a similar reason. 
+This model of the test data resulted in a decrease of accuracy (84.68%) and confidence interval (77.11% to 90.52%). However, we can consider the test data a more precise assessment of the random forest model because the model has been exposed to the test data. We can see that the test data’s accuracy mirrors the original model’s OOB estimate of error rate and subsequent accuracy rate for a similar reason. 
 
 Next, we will visualize the OOB error by plotting the random forest. 
 
