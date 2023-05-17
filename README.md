@@ -287,6 +287,6 @@ You did it! Now that you’ve created your random forest classification, you can
 
 | For attribution, please cite this work as: |
 | :--- |
-| Sciacca, M. (2023). Classifying the Predictive Power of Rhotic Acoustic Measurements: Random Forest [Tutorial]. GitHub. [https://github.com/michaelsciacca/classifying_rhotics/blob/main/README.md](https://github.com/michaelsciacca/classifying_rhotics/blob/main/README.md) |
+| Sciacca, M. (2023). Classifying the Predictive Power of Rhotic Acoustic Measurements: Random Forest [Tutorial]. GitHub. [https://github.com/michaelsciacca/classifying_rhotics/blob/main/README.md](https://github.com/michaelsciacca/classifying_rhotics/blob/main/README.md) [![DOI](https://zenodo.org/badge/639478462.svg)](https://zenodo.org/badge/latestdoi/639478462) |
 
 
