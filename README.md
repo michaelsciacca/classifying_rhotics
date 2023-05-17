@@ -257,7 +257,6 @@ The fifth variable with the smallest number in the table (0) corresponds with th
 
 You did it! Now that you’ve created your random forest classification, you can have greater confidence in your selected measure(s) that are tuned to your unique dataset. Depending on your goals, your next step might be running a linear mixed effects model with duration as your dependent variable. 
 
-
 <h2 style="font-size: 32px;">References</h2>
 
  Amengual, M. (2016). Acoustic correlates of the Spanish tap-trill contrast: Heritage and L2 Spanish speakers. *Heritage Language Journal*, *13*(2), 88-112.
@@ -284,6 +283,8 @@ You did it! Now that you’ve created your random forest classification, you can
 
  Zhou, X., Espy-Wilson, C. Y., Boyce, S., Tiede, M., Holland, C., & Choe, A. (2008). A magnetic resonance imaging-based articulatory and acoustic study of “retroflex” and “bunched” American English /r/. *The Journal of the Acoustical Society of America*, *123*(6), 4466-4481.
 </div>
+
+For attribution, please cite this work as: 
 
 
 
