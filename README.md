@@ -284,7 +284,9 @@ You did it! Now that you’ve created your random forest classification, you can
  Zhou, X., Espy-Wilson, C. Y., Boyce, S., Tiede, M., Holland, C., & Choe, A. (2008). A magnetic resonance imaging-based articulatory and acoustic study of “retroflex” and “bunched” American English /r/. *The Journal of the Acoustical Society of America*, *123*(6), 4466-4481.
 </div>
 
-For attribution, please cite this work as: 
 
+| For attribution, please cite this work as: |
+| :--- |
+| Sciacca, M. (2023). Classifying the Predictive Power of Rhotic Acoustic Measurements: Random Forest [Tutorial]. GitHub. [https://github.com/michaelsciacca/classifying_rhotics/blob/main/README.md](https://github.com/michaelsciacca/classifying_rhotics/blob/main/README.md) |
 
 
