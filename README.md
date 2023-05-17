@@ -1,7 +1,38 @@
 # Classifying the Predictive Power of Rhotic Acoustic Measurements: Random Forest
 A tutorial on how to automatically extract rhotic measurements in Praat and rank measurements according to their predictive power with random forest. 
+ 
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+  <div class="header">
+    <table>
+      <tr>
+        <td>Author:</td>
+        <td>Michael Sciacca</td>
+      </tr>
+      <tr>
+        <td>Affiliation:</td>
+        <td>Georgetown University</td>
+      </tr>
+      <tr>
+        <td>Published Date:</td>
+        <td>May 11, 2023</td>
+      </tr>
+      <tr>
+        <td>DOI:</td>
+        <td><a href="https://doi.org/10.5281/zenodo.7943247">10.5281/zenodo.7943247</a></td>
+      </tr>
+    </table>
+  </div>
 
-<h2 style="font-size: 32px;">Introduction</h2>
+  <!-- Add your content below -->
+  
+</body>
+</html>
+ 
+ <h2 style="font-size: 32px;">Introduction</h2>
 
 Measuring rhotics in diverse languages has long been a challenge for (socio)phoneticians given the relative difficulty in identifying and classifying the acoustic signal(s) associated with their realizations. If you’d like to measure rhotics and you’re visiting this tutorial, you have likely asked yourself the existential question: “is it more appropriate to measure duration, F3-F2 difference, F5-F4 difference, COG, F1, F2, F3, etc”? The list goes on! Or, “if I choose one or more of these dependent variables, how do I know which measure is a better fit for my data without running multiple mixed effects models and finding out retrospectively”? The literature on measuring rhotics, even in normative varieties of languages, is complex and, oftentimes, conflicting. Due to the continuous and gradient nature of rhotics ([Bradley, 2019](https://www.researchgate.net/profile/Travis-Bradley-4/publication/347389020_Spanish_rhotics_and_the_phonetics-phonology_interface/links/63928c38e42faa7e75aa9f8b/Spanish-rhotics-and-the-phonetics-phonology-interface.pdf)), employing the acoustic measures used in previous literature may not be sufficient or appropriate for your unique sample of speakers. 
 
